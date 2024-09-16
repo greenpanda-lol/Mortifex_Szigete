@@ -19,7 +19,7 @@ Mortifex Szigete
 A sátorban egy szelet kenyér, egy hálózsák és egy fa kard található. Ahogy megvisgálod a hálózsákot, hátha van valami benne, észreveszed, hogy a hálózsák a sátor része, így nem lehet elmozdítani. A hálózsák üres.
 
 Mit teszel?
-(if:$kenyér is "0")[
+(if:$kenyér is 0)[
 [[Elviszem az 1x kenyeret]] 
 ] (if:$fa_kard is "false")[
 [[Elviszem a fa kardot]] 
@@ -41,11 +41,66 @@ HP: $hp/10
 
 
 :: Elindulok a sivatagba {"position":"2725,5150","size":"100,100"}
+Hamarosan
 
+
+:: Elindulok az erdő felé {"position":"2000,4100","size":"100,100"}
+Elindulsz az erdő felé.
+Egy kis idő elteltével már be is lépsz az erdőbe.
+
+Mit teszel?
+[[Elindulok előre]] 
+[[Elindulok balra]]
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
 
 
 :: Elindulok az erdőbe {"position":"2400,5150","size":"100,100"}
+Hamarosan...
 
+
+:: Elindulok balra {"position":"2000,4400","size":"100,100"}
+Ahogy tovább haladsz, az erdő elkezd sűrűsödni. Eltévedtél.
+Hangokra leszel figyelmes, de te csak makacsul tovább haladsz előre. Meglátsz egy nagy mutáns bikát. Vérvörös szemein és a tekintetén látszik, hogy legszívesebben kettéhasítana mindenkit. 
+
+Mit teszel?
+[[Harcolok a Mutáns Bikával]] 
+[[Lassan kikerülöm és tovább megyek]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
+
+
+:: Elindulok előre {"position":"1700,4100","size":"100,100"}
+JELENLEG A JÁTÉK EDDIG VAN FEJLESZTVE!
+További cselekmények később lesznek.
+
+Előről kezdés: [[Kezdés]] 
+
+
+:: Elmenekülök {"position":"2650,4550","size":"100,100"}
+Ahogy menekülsz, meglátod a sátrat. Hátranézel és a szörny már nincs sehol.
+
+Mit teszel?
+[[Bemegyek a sátorba]]
+[[Kikerülöm és elindulok az erdő felé.]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
+
+
+:: Elolvasom a könyvet {"position":"2500,5600","size":"100,100"}
+A könyv:
+(text-colour:cyan)[
+Vándor, imvitállak téged:
+A nagy szörny legyőzésre,
+a sziget felszabadítására.
+Győzd le Mortifexet a nagy szörnyet,
+de ó vigyázz:
+Egy rossz mozdulat, s a kezed üti gyász.
+A jutalmad, ha teljesíted, 500 arany lesz néked.
+]
 
 
 :: Elviszem a fa kardot {"position":"2875,4750","size":"100,100"}
@@ -58,6 +113,42 @@ Mit teszel?
 ] (if:$fa_kard is "false")[
 [[Elviszem a fa kardot]] 
 ] [[Tovább megyek]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
+
+
+:: Elviszem a könyvet {"position":"2600,4325","size":"100,100"}
+Megfogod és elveszed a könyvet, majd elteszed.
+(set: $könyv to "true")
+
+Mit teszel?
+[[Elolvasom a könyvet]] 
+(if:$könyv is "false")[
+[[Elviszem a könyvet]] (Bármikor el fogod tudni olvasni.)]
+(if:$kő_kard is "false")[
+[[Elviszem a kő kardot]]
+]
+[[Elindulok az erdő felé]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
+
+
+:: Elviszem a kő kardot {"position":"2700,4325","size":"100,100"}
+Megfogod a kő kardot, majd elteszed.
+
+Megfogod és elveszed a könyvet, majd elteszed.
+(set: $kő_kard to "true")
+
+Mit teszel?
+[[Elolvasom a könyvet]] 
+(if:$könyv is "false")[
+[[Elviszem a könyvet]] (Bármikor el fogod tudni olvasni.)]
+(if:$kő_kard is "false")[
+[[Elviszem a kő kardot]]
+]
+[[Elindulok az erdő felé]] 
 
 HP: $hp/10 
 [[Mutasd az eszközeimet]] 
@@ -79,16 +170,50 @@ HP: $hp/10
 
 
 
-:: Harcolok a szörnyel. {"position":"2500,4525","size":"100,100"}
-Odalépsz a szörny elé. 
-Megüt a szürke véres csápjaival. (text-colour:red)[-1 HP]
-(set: $hp to (abs:$hp-1))
+:: Fa karddal támadok {"position":"2000,4850","size":"100,100"}
+
+
+
+:: Harcolok a Mutáns Bikával {"position":"2000,4650","size":"100,100"}
+Nekiugrasz a Mutáns Bikának.
+
+HAMAROSAN FOLYTATJUK...
+Előröl: [[Kezdés]] 
 
 HP: $hp/10 
 [[Mutasd az eszközeimet]] 
 
 
-:: Kezdés {"position":"2575,5300","size":"100,100"}
+:: Harcolok a szörnyel. {"position":"2500,4525","size":"100,100"}
+Odalépsz a szörny elé. 
+Megüt a szürke véres csápjaival. (text-colour:red)[-1 HP]
+(set: $hp to (abs:$hp-1))
+(if:$hp < 1)[
+[[Kattints ide]] 
+] Mit teszel?
+[[Támadás: Kéz]] 
+(if:$fa_kard is "true")[
+[[Támadás: Fa kard]]
+]
+(if:$kő_kard is "true")[
+[[Támadás: Kő kard]]
+]
+(if:$mythic_kard is "true")[
+[[Támadás: Mythic Kard]]
+]
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
+
+
+:: Kattints ide {"position":"2600,5700","size":"100,100"}
+Meghaltál! Sajnáljuk, számodra a játék véget ért. 
+
+Kezd előről: [[Kezdés]] 
+
+A játékot készítette: greenpanda
+
+
+:: Kezdés {"position":"2600,5300","size":"100,100"}
 A szigeten találod magad. Előtted a pusztát látod, balra pedig egy erdő terül el. Jobbra egy óriási sivatagot látsz. A szigetről sokan azt beszélik, hogy szörnyek lakják de eddig ezt senki nem erősítette meg.
 
 Merre indulsz?
@@ -102,10 +227,53 @@ HP: $hp/10
 (set: $fa_kard to "false")
 (set: $kő_kard to "false")
 (set: $mythic_kard to "false")
-(set: $kenyér to "0")
+(set: $könyv to "false")
+(set: $kenyér to 0)
 
 
-:: Mutasd az eszközeimet {"position":"2575,5600","size":"100,100"}
+:: Kikerülöm és elindulok az erdő felé. {"position":"2275,4725","size":"100,100"}
+Nagyon hamar beérsz az erdőbe. Ahogy haladsz, furcsa hangokra leszel figyelmes. Meglátsz egy mutáns bikát. A vérvörös szemein látszik, hogy legszívesebben mindenkit széjjeltrancsírozna. 
+
+Mit teszel?
+[[Harcolok a Mutáns Bikával]] 
+[[Lassan kikerülöm és tovább megyek]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
+
+
+:: Kézzel támadok {"position":"2000,4750","size":"100,100"}
+
+
+
+:: Kő karddal támadok {"position":"2000,4950","size":"100,100"}
+
+
+
+:: Lassan kikerülöm és tovább megyek {"position":"1700,4650","size":"100,100"}
+JELENLEG A JÁTÉK EDDIG VAN FEJLESZTVE!
+További cselekmények később lesznek.
+
+Előről kezdés: [[Kezdés]] 
+
+
+:: Megadom magam a szörnynek {"position":"2225,4300","size":"100,100"}
+Felemeled a magasba a kezedet, de látszik, hogy nem érti a célzást. Eszedbe jut egy jelenet egy filmből, ahol ezt csinálták: meghajolsz.
+A szörny így már érti, és az egyik kezéből egy kenyér alakot formáz.
+
+Mit csinálsz?
+(if:$kenyér is 1)[
+[[Odaadod a kenyeredet]] 
+]
+(if:$kenyér is 0)[
+[[Elmenekülök]] 
+] [[Váratlanul nekiugrok a szörnynek]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
+
+
+:: Mutasd az eszközeimet {"position":"2600,5600","size":"100,100"}
 Az eszközeid:
 
 Fegyverek:
@@ -114,11 +282,28 @@ Fegyverek:
 (if:$mythic_kard is "true")[Mythic kard]
 
 Egyéb eszközök:
+
 (if:$kenyér is 1)[1x kenyér]
 (if:$kenyér is 2)[2x kenyér]
-
+(if:$könyv is "true")[Könyv
+[[Elolvasom a könyvet]] 
+]
 Ha szeretnél kilépni, használd a vissza nyilat.
 
+
+
+:: Mythic karddal támadok {"position":"2000,5050","size":"100,100"}
+
+
+
+:: Odaadod a kenyeredet {"position":"2225,4200","size":"100,100"}
+Odaadod a kenyeredet a szörnynek, aki elégedetten mosolyog és felfalja a kenyeret, majd elkezd integetni,
+
+[[Elindulok az erdő felé]] 
+[[Harcolok a szörnyel.]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
 
 
 :: Tovább megyek {"position":"2500,4675","size":"100,200"}
@@ -129,3 +314,74 @@ Mit teszel?
 
 HP: $hp/10 
 [[Mutasd az eszközeimet]] 
+
+
+:: Támadás: Fa kard {"position":"2500,4325","size":"100,100"}
+Megfogod a fa kardod és nekirohansz a szörnynek. A szörny próbál védekezni, de sikeresen megölöd.
+Találsz nála egy könyvet és egy kő kardot.
+
+Mit teszel?
+[[Elolvasom a könyvet]] 
+(if:$könyv is "false")[
+[[Elviszem a könyvet]] (Bármikor el fogod tudni olvasni.)]
+(if:$kő_kard is "false")[
+[[Elviszem a kő kardot]]
+]
+[[Elindulok az erdő felé]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
+
+
+:: Támadás: Kéz {"position":"2500,4425","size":"100,100"}
+Megpróbálod megtámadni a kezeddel, de sikertelen. A szörny a csápjaival megint megüt (text-colour:red)[-3 HP]
+(set: $hp to (abs:$hp-3))
+(if:$hp < 1)[
+[[Kattints ide]] ]
+
+Mit teszel?
+[[Megadom magam a szörnynek]] 
+[[Elmenekülök]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
+
+
+:: Támadás: Kő kard {"position":"2500,4225","size":"100,100"}
+Megfogod a kő kardod és nekirohansz a szörnynek. A szörny próbál védekezni, de sikeresen megölöd.
+Találsz nála egy könyvet.
+
+Mit teszel?
+[[Elolvasom a könyvet]] 
+(if:$könyv is "false")[
+[[Elviszem a könyvet]] (Bármikor el fogod tudni olvasni.)]
+(if:$kő_kard is "false")[
+[[Elviszem a kő kardot]]
+]
+[[Elindulok az erdő felé]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
+
+
+:: Támadás: Mythic Kard {"position":"2500,4125","size":"100,100"}
+Megfogod a Mythic kardod és nekirohansz a szörnynek. A szörny próbál védekezni, de a kardod annyira erős, hogy gyorsan megölöd.
+Találsz nála egy könyvet és egy kő kardot.
+
+Mit teszel?
+[[Elolvasom a könyvet]] 
+(if:$könyv is "false")[
+[[Elviszem a könyvet]] (Bármikor el fogod tudni olvasni.)]
+(if:$kő_kard is "false")[
+[[Elviszem a kő kardot]]
+]
+[[Elindulok az erdő felé]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
+
+
+:: Váratlanul nekiugrok a szörnynek {"position":"2325,4200","size":"100,100"}
+Nekiugrasz a szörnynek váratlanul, de ő fel van készülve a támadásra ezért megfog és elkezd verni. Az egész tested vérben úszik...
+
+[[Kattints ide]] 

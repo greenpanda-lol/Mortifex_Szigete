@@ -9,7 +9,7 @@
 </head>
 <body>
 <tw-story><noscript><tw-noscript>JavaScript needs to be enabled to play Mortifex Szigete.</tw-noscript></noscript></tw-story>
-<tw-storydata name="Mortifex Szigete" startnode="1" creator="Twine" creator-version="2.9.2" format="Harlowe" format-version="3.3.9" ifid="8F78F009-A31B-4911-8076-C3CC342050E3" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-tag name="Erdő" color="green"></tw-tag><tw-passagedata pid="1" name="Kezdés" tags="" position="2575,5300" size="100,100">A szigeten találod magad. Előtted a pusztát látod, balra pedig egy erdő terül el. Jobbra egy óriási sivatagot látsz. A szigetről sokan azt beszélik, hogy szörnyek lakják de eddig ezt senki nem erősítette meg.
+<tw-storydata name="Mortifex Szigete" startnode="1" creator="Twine" creator-version="2.9.2" format="Harlowe" format-version="3.3.9" ifid="8F78F009-A31B-4911-8076-C3CC342050E3" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-tag name="Erdő" color="green"></tw-tag><tw-passagedata pid="1" name="Kezdés" tags="" position="2600,5300" size="100,100">A szigeten találod magad. Előtted a pusztát látod, balra pedig egy erdő terül el. Jobbra egy óriási sivatagot látsz. A szigetről sokan azt beszélik, hogy szörnyek lakják de eddig ezt senki nem erősítette meg.
 
 Merre indulsz?
 [[Elindulok az erdőbe]]
@@ -22,14 +22,15 @@ HP: $hp/10
 (set: $fa_kard to &quot;false&quot;)
 (set: $kő_kard to &quot;false&quot;)
 (set: $mythic_kard to &quot;false&quot;)
-(set: $kenyér to &quot;0&quot;)</tw-passagedata><tw-passagedata pid="2" name="Elindulok az erdőbe" tags="" position="2400,5150" size="100,100"></tw-passagedata><tw-passagedata pid="3" name="Elindulok a pusztába" tags="" position="2575,5125" size="100,100">Ahogy barangolsz a pusztán, egy kis sátrat látsz meg.
+(set: $könyv to &quot;false&quot;)
+(set: $kenyér to 0)</tw-passagedata><tw-passagedata pid="2" name="Elindulok az erdőbe" tags="" position="2400,5150" size="100,100">Hamarosan...</tw-passagedata><tw-passagedata pid="3" name="Elindulok a pusztába" tags="" position="2575,5125" size="100,100">Ahogy barangolsz a pusztán, egy kis sátrat látsz meg.
 
 Mit teszel?
 [[Bemegyek a sátorba]]
 [[Tovább megyek]]
 
 HP: $hp/10 
-[[Mutasd az eszközeimet]] </tw-passagedata><tw-passagedata pid="4" name="Elindulok a sivatagba" tags="" position="2725,5150" size="100,100"></tw-passagedata><tw-passagedata pid="5" name="Mutasd az eszközeimet" tags="" position="2575,5600" size="100,100">Az eszközeid:
+[[Mutasd az eszközeimet]] </tw-passagedata><tw-passagedata pid="4" name="Elindulok a sivatagba" tags="" position="2725,5150" size="100,100">Hamarosan</tw-passagedata><tw-passagedata pid="5" name="Mutasd az eszközeimet" tags="" position="2600,5600" size="100,100">Az eszközeid:
 
 Fegyverek:
 (if:$fa_kard is &quot;true&quot;)[Fa kard]
@@ -37,14 +38,17 @@ Fegyverek:
 (if:$mythic_kard is &quot;true&quot;)[Mythic kard]
 
 Egyéb eszközök:
+
 (if:$kenyér is 1)[1x kenyér]
 (if:$kenyér is 2)[2x kenyér]
-
+(if:$könyv is &quot;true&quot;)[Könyv
+[[Elolvasom a könyvet]] 
+]
 Ha szeretnél kilépni, használd a vissza nyilat.
 </tw-passagedata><tw-passagedata pid="6" name="Bemegyek a sátorba" tags="" position="2600,4750" size="100,100">A sátorban egy szelet kenyér, egy hálózsák és egy fa kard található. Ahogy megvisgálod a hálózsákot, hátha van valami benne, észreveszed, hogy a hálózsák a sátor része, így nem lehet elmozdítani. A hálózsák üres.
 
 Mit teszel?
-(if:$kenyér is &quot;0&quot;)[
+(if:$kenyér is 0)[
 [[Elviszem az 1x kenyeret]] 
 ] (if:$fa_kard is &quot;false&quot;)[
 [[Elviszem a fa kardot]] 
@@ -83,9 +87,173 @@ HP: $hp/10
 [[Mutasd az eszközeimet]] </tw-passagedata><tw-passagedata pid="10" name="Harcolok a szörnyel." tags="" position="2500,4525" size="100,100">Odalépsz a szörny elé. 
 Megüt a szürke véres csápjaival. (text-colour:red)[-1 HP]
 (set: $hp to (abs:$hp-1))
+(if:$hp &lt; 1)[
+[[Kattints ide]] 
+] Mit teszel?
+[[Támadás: Kéz]] 
+(if:$fa_kard is &quot;true&quot;)[
+[[Támadás: Fa kard]]
+]
+(if:$kő_kard is &quot;true&quot;)[
+[[Támadás: Kő kard]]
+]
+(if:$mythic_kard is &quot;true&quot;)[
+[[Támadás: Mythic Kard]]
+]
+HP: $hp/10 
+[[Mutasd az eszközeimet]] </tw-passagedata><tw-passagedata pid="11" name="Kattints ide" tags="" position="2600,5700" size="100,100">Meghaltál! Sajnáljuk, számodra a játék véget ért. 
+
+Kezd előről: [[Kezdés]] 
+
+A játékot készítette: greenpanda</tw-passagedata><tw-passagedata pid="12" name="Támadás: Kéz" tags="" position="2500,4425" size="100,100">Megpróbálod megtámadni a kezeddel, de sikertelen. A szörny a csápjaival megint megüt (text-colour:red)[-3 HP]
+(set: $hp to (abs:$hp-3))
+(if:$hp &lt; 1)[
+[[Kattints ide]] ]
+
+Mit teszel?
+[[Megadom magam a szörnynek]] 
+[[Elmenekülök]] 
 
 HP: $hp/10 
-[[Mutasd az eszközeimet]] </tw-passagedata></tw-storydata>
+[[Mutasd az eszközeimet]] </tw-passagedata><tw-passagedata pid="13" name="Támadás: Kő kard" tags="" position="2500,4225" size="100,100">Megfogod a kő kardod és nekirohansz a szörnynek. A szörny próbál védekezni, de sikeresen megölöd.
+Találsz nála egy könyvet.
+
+Mit teszel?
+[[Elolvasom a könyvet]] 
+(if:$könyv is &quot;false&quot;)[
+[[Elviszem a könyvet]] (Bármikor el fogod tudni olvasni.)]
+(if:$kő_kard is &quot;false&quot;)[
+[[Elviszem a kő kardot]]
+]
+[[Elindulok az erdő felé]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] </tw-passagedata><tw-passagedata pid="14" name="Támadás: Mythic Kard" tags="" position="2500,4125" size="100,100">Megfogod a Mythic kardod és nekirohansz a szörnynek. A szörny próbál védekezni, de a kardod annyira erős, hogy gyorsan megölöd.
+Találsz nála egy könyvet és egy kő kardot.
+
+Mit teszel?
+[[Elolvasom a könyvet]] 
+(if:$könyv is &quot;false&quot;)[
+[[Elviszem a könyvet]] (Bármikor el fogod tudni olvasni.)]
+(if:$kő_kard is &quot;false&quot;)[
+[[Elviszem a kő kardot]]
+]
+[[Elindulok az erdő felé]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] </tw-passagedata><tw-passagedata pid="15" name="Támadás: Fa kard" tags="" position="2500,4325" size="100,100">Megfogod a fa kardod és nekirohansz a szörnynek. A szörny próbál védekezni, de sikeresen megölöd.
+Találsz nála egy könyvet és egy kő kardot.
+
+Mit teszel?
+[[Elolvasom a könyvet]] 
+(if:$könyv is &quot;false&quot;)[
+[[Elviszem a könyvet]] (Bármikor el fogod tudni olvasni.)]
+(if:$kő_kard is &quot;false&quot;)[
+[[Elviszem a kő kardot]]
+]
+[[Elindulok az erdő felé]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] </tw-passagedata><tw-passagedata pid="16" name="Elmenekülök" tags="" position="2650,4550" size="100,100">Ahogy menekülsz, meglátod a sátrat. Hátranézel és a szörny már nincs sehol.
+
+Mit teszel?
+[[Bemegyek a sátorba]]
+[[Kikerülöm és elindulok az erdő felé.]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] </tw-passagedata><tw-passagedata pid="17" name="Megadom magam a szörnynek" tags="" position="2225,4300" size="100,100">Felemeled a magasba a kezedet, de látszik, hogy nem érti a célzást. Eszedbe jut egy jelenet egy filmből, ahol ezt csinálták: meghajolsz.
+A szörny így már érti, és az egyik kezéből egy kenyér alakot formáz.
+
+Mit csinálsz?
+(if:$kenyér is 1)[
+[[Odaadod a kenyeredet]] 
+]
+(if:$kenyér is 0)[
+[[Elmenekülök]] 
+] [[Váratlanul nekiugrok a szörnynek]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] </tw-passagedata><tw-passagedata pid="18" name="Kikerülöm és elindulok az erdő felé." tags="" position="2275,4725" size="100,100">Nagyon hamar beérsz az erdőbe. Ahogy haladsz, furcsa hangokra leszel figyelmes. Meglátsz egy mutáns bikát. A vérvörös szemein látszik, hogy legszívesebben mindenkit széjjeltrancsírozna. 
+
+Mit teszel?
+[[Harcolok a Mutáns Bikával]] 
+[[Lassan kikerülöm és tovább megyek]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] </tw-passagedata><tw-passagedata pid="19" name="Elolvasom a könyvet" tags="" position="2500,5600" size="100,100">A könyv:
+(text-colour:cyan)[
+Vándor, imvitállak téged:
+A nagy szörny legyőzésre,
+a sziget felszabadítására.
+Győzd le Mortifexet a nagy szörnyet,
+de ó vigyázz:
+Egy rossz mozdulat, s a kezed üti gyász.
+A jutalmad, ha teljesíted, 500 arany lesz néked.
+]</tw-passagedata><tw-passagedata pid="20" name="Elviszem a könyvet" tags="" position="2600,4325" size="100,100">Megfogod és elveszed a könyvet, majd elteszed.
+(set: $könyv to &quot;true&quot;)
+
+Mit teszel?
+[[Elolvasom a könyvet]] 
+(if:$könyv is &quot;false&quot;)[
+[[Elviszem a könyvet]] (Bármikor el fogod tudni olvasni.)]
+(if:$kő_kard is &quot;false&quot;)[
+[[Elviszem a kő kardot]]
+]
+[[Elindulok az erdő felé]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] </tw-passagedata><tw-passagedata pid="21" name="Elviszem a kő kardot" tags="" position="2700,4325" size="100,100">Megfogod a kő kardot, majd elteszed.
+
+Megfogod és elveszed a könyvet, majd elteszed.
+(set: $kő_kard to &quot;true&quot;)
+
+Mit teszel?
+[[Elolvasom a könyvet]] 
+(if:$könyv is &quot;false&quot;)[
+[[Elviszem a könyvet]] (Bármikor el fogod tudni olvasni.)]
+(if:$kő_kard is &quot;false&quot;)[
+[[Elviszem a kő kardot]]
+]
+[[Elindulok az erdő felé]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] </tw-passagedata><tw-passagedata pid="22" name="Elindulok az erdő felé" tags="" position="2000,4100" size="100,100">Elindulsz az erdő felé.
+Egy kis idő elteltével már be is lépsz az erdőbe.
+
+Mit teszel?
+[[Elindulok előre]] 
+[[Elindulok balra]]
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] </tw-passagedata><tw-passagedata pid="23" name="Elindulok balra" tags="" position="2000,4400" size="100,100">Ahogy tovább haladsz, az erdő elkezd sűrűsödni. Eltévedtél.
+Hangokra leszel figyelmes, de te csak makacsul tovább haladsz előre. Meglátsz egy nagy mutáns bikát. Vérvörös szemein és a tekintetén látszik, hogy legszívesebben kettéhasítana mindenkit. 
+
+Mit teszel?
+[[Harcolok a Mutáns Bikával]] 
+[[Lassan kikerülöm és tovább megyek]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] </tw-passagedata><tw-passagedata pid="24" name="Elindulok előre" tags="" position="1700,4100" size="100,100">JELENLEG A JÁTÉK EDDIG VAN FEJLESZTVE!
+További cselekmények később lesznek.
+
+Előről kezdés: [[Kezdés]] </tw-passagedata><tw-passagedata pid="25" name="Lassan kikerülöm és tovább megyek" tags="" position="1700,4650" size="100,100">JELENLEG A JÁTÉK EDDIG VAN FEJLESZTVE!
+További cselekmények később lesznek.
+
+Előről kezdés: [[Kezdés]] </tw-passagedata><tw-passagedata pid="26" name="Harcolok a Mutáns Bikával" tags="" position="2000,4650" size="100,100">Nekiugrasz a Mutáns Bikának.
+
+HAMAROSAN FOLYTATJUK...
+Előröl: [[Kezdés]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] </tw-passagedata><tw-passagedata pid="27" name="Odaadod a kenyeredet" tags="" position="2225,4200" size="100,100">Odaadod a kenyeredet a szörnynek, aki elégedetten mosolyog és felfalja a kenyeret, majd elkezd integetni,
+
+[[Elindulok az erdő felé]] 
+[[Harcolok a szörnyel.]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] </tw-passagedata><tw-passagedata pid="28" name="Váratlanul nekiugrok a szörnynek" tags="" position="2325,4200" size="100,100">Nekiugrasz a szörnynek váratlanul, de ő fel van készülve a támadásra ezért megfog és elkezd verni. Az egész tested vérben úszik...
+
+[[Kattints ide]] </tw-passagedata><tw-passagedata pid="29" name="Kézzel támadok" tags="" position="2000,4750" size="100,100"></tw-passagedata><tw-passagedata pid="30" name="Fa karddal támadok" tags="" position="2000,4850" size="100,100"></tw-passagedata><tw-passagedata pid="31" name="Kő karddal támadok" tags="" position="2000,4950" size="100,100"></tw-passagedata><tw-passagedata pid="32" name="Mythic karddal támadok" tags="" position="2000,5050" size="100,100"></tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
