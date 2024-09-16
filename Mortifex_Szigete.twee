@@ -1,0 +1,131 @@
+:: StoryTitle
+Mortifex Szigete
+
+
+:: StoryData
+{
+  "ifid": "8F78F009-A31B-4911-8076-C3CC342050E3",
+  "format": "Harlowe",
+  "format-version": "3.3.9",
+  "start": "Kezdés",
+  "tag-colors": {
+    "Erdő": "green"
+  },
+  "zoom": 1
+}
+
+
+:: Bemegyek a sátorba {"position":"2600,4750","size":"100,100"}
+A sátorban egy szelet kenyér, egy hálózsák és egy fa kard található. Ahogy megvisgálod a hálózsákot, hátha van valami benne, észreveszed, hogy a hálózsák a sátor része, így nem lehet elmozdítani. A hálózsák üres.
+
+Mit teszel?
+(if:$kenyér is "0")[
+[[Elviszem az 1x kenyeret]] 
+] (if:$fa_kard is "false")[
+[[Elviszem a fa kardot]] 
+] [[Tovább megyek]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
+
+
+:: Elindulok a pusztába {"position":"2575,5125","size":"100,100"}
+Ahogy barangolsz a pusztán, egy kis sátrat látsz meg.
+
+Mit teszel?
+[[Bemegyek a sátorba]]
+[[Tovább megyek]]
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
+
+
+:: Elindulok a sivatagba {"position":"2725,5150","size":"100,100"}
+
+
+
+:: Elindulok az erdőbe {"position":"2400,5150","size":"100,100"}
+
+
+
+:: Elviszem a fa kardot {"position":"2875,4750","size":"100,100"}
+Elviszed a fa kardot.
+(set: $fa_kard to "true")
+
+Mit teszel?
+(if:$kenyér is "0")[
+[[Elviszem az 1x kenyeret]] 
+] (if:$fa_kard is "false")[
+[[Elviszem a fa kardot]] 
+] [[Tovább megyek]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
+
+
+:: Elviszem az 1x kenyeret {"position":"2750,4750","size":"100,100"}
+Elviszed az 1x kenyeret.
+(set: $kenyér to 1)
+
+Mit teszel?
+(if:$kenyér is 0)[
+[[Elviszem az 1x kenyeret]] 
+] (if:$fa_kard is "false")[
+[[Elviszem a fa kardot]] 
+] [[Tovább megyek]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
+
+
+
+:: Harcolok a szörnyel. {"position":"2500,4525","size":"100,100"}
+Odalépsz a szörny elé. 
+Megüt a szürke véres csápjaival. (text-colour:red)[-1 HP]
+(set: $hp to (abs:$hp-1))
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
+
+
+:: Kezdés {"position":"2575,5300","size":"100,100"}
+A szigeten találod magad. Előtted a pusztát látod, balra pedig egy erdő terül el. Jobbra egy óriási sivatagot látsz. A szigetről sokan azt beszélik, hogy szörnyek lakják de eddig ezt senki nem erősítette meg.
+
+Merre indulsz?
+[[Elindulok az erdőbe]]
+[[Elindulok a pusztába]]
+[[Elindulok a sivatagba]]
+(set: $hp to 10)
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
+
+(set: $fa_kard to "false")
+(set: $kő_kard to "false")
+(set: $mythic_kard to "false")
+(set: $kenyér to "0")
+
+
+:: Mutasd az eszközeimet {"position":"2575,5600","size":"100,100"}
+Az eszközeid:
+
+Fegyverek:
+(if:$fa_kard is "true")[Fa kard]
+(if:$kő_kard is "true")[Kő kard]
+(if:$mythic_kard is "true")[Mythic kard]
+
+Egyéb eszközök:
+(if:$kenyér is 1)[1x kenyér]
+(if:$kenyér is 2)[2x kenyér]
+
+Ha szeretnél kilépni, használd a vissza nyilat.
+
+
+
+:: Tovább megyek {"position":"2500,4675","size":"100,200"}
+Ahogy elhagyod a sátrat, tovább haladsz. Egy szörnyel találod magad szemben, akin látszik, hogyha közelítesz, rögtön megakar ölni. Szürke teste van, de a szeme vörösek és néhol vérzik is a szörny. Meglátod balra az erdőt.
+
+Mit teszel?
+[[Harcolok a szörnyel.]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
