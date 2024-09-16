@@ -19,7 +19,7 @@ Mortifex Szigete
 A sátorban egy szelet kenyér, egy hálózsák és egy fa kard található. Ahogy megvisgálod a hálózsákot, hátha van valami benne, észreveszed, hogy a hálózsák a sátor része, így nem lehet elmozdítani. A hálózsák üres.
 
 Mit teszel?
-(if:$kenyér is 0)[
+(if:$claimed_sátor_kenyér is "false")[
 [[Elviszem az 1x kenyeret]] 
 ] (if:$fa_kard is "false")[
 [[Elviszem a fa kardot]] 
@@ -57,11 +57,9 @@ HP: $hp/10
 
 
 :: Elindulok az erdőbe {"position":"2400,5150","size":"100,100"}
-Beérsz az erdőbe. Furcsa hangokra leszel figyelmes.
-(if:$kenyér is 0)[Meglátsz a földön egy szelet kenyeret.]
-
+Beérsz az erdőbe. Furcsa hangokra leszel figyelmes. (if:$claimed_erdő_kenyér is "false")[Meglátsz a földön egy szelet kenyeret.]
 Mit teszel?
-(if:$kenyér is 0)[
+(if:$claimed_erdő_kenyér is "false")[
 [[Elviszem az 1x kenyeret]] ]
 [[Elindulok jobbra]] 
 
@@ -140,8 +138,7 @@ HP: $hp/10
 
 :: Elviszem a kenyeret {"position":"2300,5150","size":"100,100"}
 Elviszed az 1x kenyeret.
-(set: $kenyér to 1)
-
+(set: $kenyér to (abs:$kenyér + 1)) (set: $claimed_erdő_kenyér to "true")
 Mit teszel?
 [[Elindulok jobbra]] 
 
@@ -187,7 +184,7 @@ HP: $hp/10
 
 :: Elviszem az 1x kenyeret {"position":"2750,4750","size":"100,100"}
 Elviszed az 1x kenyeret.
-(set: $kenyér to 1)
+(set: $kenyér to (abs:$kenyér + 1))(set: $claimed_sátor_kenyér to "true")
 
 Mit teszel?
 (if:$kenyér is 0)[
@@ -274,6 +271,8 @@ HP: $hp/10
 (set: $mythic_kard to "false")
 (set: $könyv to "false")
 (set: $kenyér to 0)
+(set: $claimed_sátor_kenyér to "false")
+(set: $claimed_erdő_kenyér to "false")
 
 
 :: Kikerülöm és elindulok az erdő felé. {"position":"2275,4725","size":"100,100"}
@@ -360,8 +359,7 @@ Fegyverek:
 
 Egyéb eszközök:
 
-(if:$kenyér is 1)[1x kenyér]
-(if:$kenyér is 2)[2x kenyér]
+(if:$kenyér > 0)[$kenyér x kenyér]
 (if:$könyv is "true")[Könyv
 [[Elolvasom a könyvet]] 
 ]
@@ -382,7 +380,7 @@ HP: $hp/10
 
 
 :: Odaadod a kenyeredet {"position":"2225,4200","size":"100,100"}
-Odaadod a kenyeredet a szörnynek, aki elégedetten mosolyog és felfalja a kenyeret, majd elkezd integetni. (set: $kenyér to 0)
+Odaadod a kenyeredet a szörnynek, aki elégedetten mosolyog és felfalja a kenyeret, majd elkezd integetni. (set: $kenyér to -1)
 
 Mit teszel?
 [[Elindulok az erdő felé]] 

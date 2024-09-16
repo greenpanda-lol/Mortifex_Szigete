@@ -23,11 +23,11 @@ HP: $hp/10
 (set: $kő_kard to &quot;false&quot;)
 (set: $mythic_kard to &quot;false&quot;)
 (set: $könyv to &quot;false&quot;)
-(set: $kenyér to 0)</tw-passagedata><tw-passagedata pid="2" name="Elindulok az erdőbe" tags="" position="2400,5150" size="100,100">Beérsz az erdőbe. Furcsa hangokra leszel figyelmes.
-(if:$kenyér is 0)[Meglátsz a földön egy szelet kenyeret.]
-
+(set: $kenyér to 0)
+(set: $claimed_sátor_kenyér to &quot;false&quot;)
+(set: $claimed_erdő_kenyér to &quot;false&quot;)</tw-passagedata><tw-passagedata pid="2" name="Elindulok az erdőbe" tags="" position="2400,5150" size="100,100">Beérsz az erdőbe. Furcsa hangokra leszel figyelmes. (if:$claimed_erdő_kenyér is &quot;false&quot;)[Meglátsz a földön egy szelet kenyeret.]
 Mit teszel?
-(if:$kenyér is 0)[
+(if:$claimed_erdő_kenyér is &quot;false&quot;)[
 [[Elviszem az 1x kenyeret]] ]
 [[Elindulok jobbra]] 
 
@@ -48,8 +48,7 @@ Fegyverek:
 
 Egyéb eszközök:
 
-(if:$kenyér is 1)[1x kenyér]
-(if:$kenyér is 2)[2x kenyér]
+(if:$kenyér &gt; 0)[$kenyér x kenyér]
 (if:$könyv is &quot;true&quot;)[Könyv
 [[Elolvasom a könyvet]] 
 ]
@@ -57,7 +56,7 @@ Ha szeretnél kilépni, használd a vissza nyilat.
 </tw-passagedata><tw-passagedata pid="6" name="Bemegyek a sátorba" tags="" position="2600,4750" size="100,100">A sátorban egy szelet kenyér, egy hálózsák és egy fa kard található. Ahogy megvisgálod a hálózsákot, hátha van valami benne, észreveszed, hogy a hálózsák a sátor része, így nem lehet elmozdítani. A hálózsák üres.
 
 Mit teszel?
-(if:$kenyér is 0)[
+(if:$claimed_sátor_kenyér is &quot;false&quot;)[
 [[Elviszem az 1x kenyeret]] 
 ] (if:$fa_kard is &quot;false&quot;)[
 [[Elviszem a fa kardot]] 
@@ -71,7 +70,7 @@ Mit teszel?
 
 HP: $hp/10 
 [[Mutasd az eszközeimet]] </tw-passagedata><tw-passagedata pid="8" name="Elviszem az 1x kenyeret" tags="" position="2750,4750" size="100,100">Elviszed az 1x kenyeret.
-(set: $kenyér to 1)
+(set: $kenyér to (abs:$kenyér + 1))(set: $claimed_sátor_kenyér to &quot;true&quot;)
 
 Mit teszel?
 (if:$kenyér is 0)[
@@ -259,7 +258,7 @@ Előről kezdés: [[Kezdés]] </tw-passagedata><tw-passagedata pid="26" name="Ha
 [[Mythic karddal támadok]] 
 
 HP: $hp/10 
-[[Mutasd az eszközeimet]] </tw-passagedata><tw-passagedata pid="27" name="Odaadod a kenyeredet" tags="" position="2225,4200" size="100,100">Odaadod a kenyeredet a szörnynek, aki elégedetten mosolyog és felfalja a kenyeret, majd elkezd integetni. (set: $kenyér to 0)
+[[Mutasd az eszközeimet]] </tw-passagedata><tw-passagedata pid="27" name="Odaadod a kenyeredet" tags="" position="2225,4200" size="100,100">Odaadod a kenyeredet a szörnynek, aki elégedetten mosolyog és felfalja a kenyeret, majd elkezd integetni. (set: $kenyér to -1)
 
 Mit teszel?
 [[Elindulok az erdő felé]] 
@@ -304,8 +303,7 @@ Mit teszel?
 
 HP: $hp/10 
 [[Mutasd az eszközeimet]] </tw-passagedata><tw-passagedata pid="33" name="Elviszem a kenyeret" tags="" position="2300,5150" size="100,100">Elviszed az 1x kenyeret.
-(set: $kenyér to 1)
-
+(set: $kenyér to (abs:$kenyér + 1)) (set: $claimed_erdő_kenyér to &quot;true&quot;)
 Mit teszel?
 [[Elindulok jobbra]] 
 
