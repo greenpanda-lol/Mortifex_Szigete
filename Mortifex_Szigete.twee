@@ -57,7 +57,16 @@ HP: $hp/10
 
 
 :: Elindulok az erdőbe {"position":"2400,5150","size":"100,100"}
-Hamarosan...
+Beérsz az erdőbe. Furcsa hangokra leszel figyelmes.
+(if:$kenyér is 0)[Meglátsz a földön egy szelet kenyeret.]
+
+Mit teszel?
+(if:$kenyér is 0)[
+[[Elviszem az 1x kenyeret]] ]
+[[Elindulok jobbra]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
 
 
 :: Elindulok balra {"position":"2000,4400","size":"100,100"}
@@ -77,6 +86,17 @@ JELENLEG A JÁTÉK EDDIG VAN FEJLESZTVE!
 További cselekmények később lesznek.
 
 Előről kezdés: [[Kezdés]] 
+
+
+:: Elindulok jobbra {"position":"2150,5000","size":"100,100"}
+Ahogy mész, egyre inkább kezdesz hangokat hallani. Bika hangokat is. Tovább haladsz és meglátsz egy Mutáns Bika szörnyet. Szemei vérvörösek. Látszik rajta, hogy legszívesebben mindenkit legyilkolna.
+
+Mit teszel?
+[[Harcolok a Mutáns Bikával]] 
+[[Lassan kikerülöm és tovább megyek]]
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
 
 
 :: Elmenekülök {"position":"2650,4550","size":"100,100"}
@@ -113,6 +133,17 @@ Mit teszel?
 ] (if:$fa_kard is "false")[
 [[Elviszem a fa kardot]] 
 ] [[Tovább megyek]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
+
+
+:: Elviszem a kenyeret {"position":"2300,5150","size":"100,100"}
+Elviszed az 1x kenyeret.
+(set: $kenyér to 1)
+
+Mit teszel?
+[[Elindulok jobbra]] 
 
 HP: $hp/10 
 [[Mutasd az eszközeimet]] 
@@ -171,14 +202,28 @@ HP: $hp/10
 
 
 :: Fa karddal támadok {"position":"2000,4850","size":"100,100"}
+A kardod megvágja a bikát, de ő csak mégegyet ordít. Meglátsz rajta egy tetoválást: (text-colour:cyan)[MORTIFEX SZOLGÁJA]
+Látod, hogy mindjárt neked rohan. A szemein látszik a célja: a gyilkolás.
 
+Mit teszel?
+[[Semmit]]
+[[Úgy teszel, mintha elfutnál, de inkább megtámadod]] 
+[[Menekülök]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
 
 
 :: Harcolok a Mutáns Bikával {"position":"2000,4650","size":"100,100"}
-Nekiugrasz a Mutáns Bikának.
-
-HAMAROSAN FOLYTATJUK...
-Előröl: [[Kezdés]] 
+Nekiugrasz a Mutáns Bikának. Üvölt egyet, majd ő is elkezd futni feléd. Megüt téged a szarvaival, majd mégegyszer üvölt. (text-colour:red)[-1 HP]
+(set: $hp to (abs:$hp-1))
+(if:$hp < 1)[
+[[Kattints ide]] 
+] Mit teszel?
+[[Kézzel támadok]] 
+[[Fa karddal támadok]]
+[[Kő karddal támadok]] 
+[[Mythic karddal támadok]] 
 
 HP: $hp/10 
 [[Mutasd az eszközeimet]] 
@@ -243,11 +288,29 @@ HP: $hp/10
 
 
 :: Kézzel támadok {"position":"2000,4750","size":"100,100"}
+Megcsapod a bikát a kezeddel. Erre ő, mintha röhögni akarna, ismét neked rohan, te elesel és átszalad rajtad. (text-colour:red)[-3 HP]
+(set: $hp to (abs:$hp-3))
+(if:$hp < 1)[
+[[Kattints ide]] ]
 
+Mit teszel?
+[[Kézzel támadok]] 
+[[Menekülök]]
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
 
 
 :: Kő karddal támadok {"position":"2000,4950","size":"100,100"}
+A kardod megvágja a bikát, elkezd vérezni a teste, de ő csak mégegyet ordít. Meglátsz rajta egy tetoválást: (text-colour:cyan)[MORTIFEX SZOLGÁJA]
+Látod, hogy mindjárt neked rohan. A szemein látszik a célja: a gyilkolás. A düh vezérli.
 
+Mit teszel?
+[[Rádobom a kardom a hasa környékére]] 
+[[Menekülök]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
 
 
 :: Lassan kikerülöm és tovább megyek {"position":"1700,4650","size":"100,100"}
@@ -273,6 +336,20 @@ HP: $hp/10
 [[Mutasd az eszközeimet]] 
 
 
+:: Megpróbálok elmenni, ahol kezdtem {"position":"2000,5200","size":"100,100"}
+JELENLEG A JÁTÉK EDDIG VAN FEJLESZTVE!
+További cselekmények később lesznek.
+
+Előről kezdés: [[Kezdés]] 
+
+
+:: Menekülök {"position":"1550,4750","size":"100,100"}
+JELENLEG A JÁTÉK EDDIG VAN FEJLESZTVE!
+További cselekmények később lesznek.
+
+Előről kezdés: [[Kezdés]] 
+
+
 :: Mutasd az eszközeimet {"position":"2600,5600","size":"100,100"}
 Az eszközeid:
 
@@ -293,14 +370,74 @@ Ha szeretnél kilépni, használd a vissza nyilat.
 
 
 :: Mythic karddal támadok {"position":"2000,5050","size":"100,100"}
+A kardod súlyosan megsebesíti a bikát, elkezd vérezni a teste, de ő csak mégegyet ordít. Meglátsz rajta egy tetoválást: (text-colour:cyan)[MORTIFEX SZOLGÁJA]
+Látod, hogy mindjárt neked rohan. A szemein látszik a célja: a gyilkolás. A düh vezérli.
 
+Mit teszel?
+[[Rádobom a kardom a hasa környékére]] 
+[[Menekülök]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
 
 
 :: Odaadod a kenyeredet {"position":"2225,4200","size":"100,100"}
-Odaadod a kenyeredet a szörnynek, aki elégedetten mosolyog és felfalja a kenyeret, majd elkezd integetni,
+Odaadod a kenyeredet a szörnynek, aki elégedetten mosolyog és felfalja a kenyeret, majd elkezd integetni. (set: $kenyér to 0)
 
+Mit teszel?
 [[Elindulok az erdő felé]] 
 [[Harcolok a szörnyel.]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
+
+
+:: Rádobom a Mythic kardom a hasa környékére {"position":"1900,5050","size":"100,100"}
+A Mutáns Bika egy óriásit ordít. Te ijedtedben egy kicsit hátra hőkölsz, de amikor látod, hogy elesik és lehunyja a szemét, tudatosul benned, hogy a bika meghalt. Kiveszed a kardod a testéből.
+
+Mit teszel?
+[[Elmenekülök]]
+[[Megpróbálok elmenni, ahol kezdtem]]
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
+
+
+:: Rádobom a kardom a hasa környékére {"position":"1900,4950","size":"100,100"}
+A Mutáns Bika egy óriásit ordít. Te ijedtedben egy kicsit hátra hőkölsz, de amikor látod, hogy elesik és lehunyja a szemét, tudatosul benned, hogy a bika meghalt. Kiveszed a kardod a testéből.
+
+Mit teszel?
+[[Elmenekülök]]
+[[Megpróbálok elmenni, ahol kezdtem]]
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
+
+
+:: Ráugrok és elkezdem verni a fejét {"position":"1800,4850","size":"100,100"}
+A bika ledob magáról, majd neked rohan, te elesel és átszalad rajtad. (text-colour:red)[-8 HP]
+(set: $hp to (abs:$hp-8))
+(if:$hp < 1)[
+[[Kattints ide]] ]
+
+Mit teszel?
+[[Fa karddal támadok]] 
+[[Menekülök]]
+[[Semmit]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
+
+
+:: Semmit {"position":"1900,4750","size":"100,100"}
+A bika meglepődik, de nem sokat tétovázik, hanem neked rohan, te elesel és átszalad rajtad. (text-colour:red)[-6 HP]
+(set: $hp to (abs:$hp-6))
+(if:$hp < 1)[
+[[Kattints ide]] ]
+
+Mit teszel?
+[[Fa karddal támadok]] 
+[[Menekülök]]
 
 HP: $hp/10 
 [[Mutasd az eszközeimet]] 
@@ -385,3 +522,16 @@ HP: $hp/10
 Nekiugrasz a szörnynek váratlanul, de ő fel van készülve a támadásra ezért megfog és elkezd verni. Az egész tested vérben úszik...
 
 [[Kattints ide]] 
+
+
+:: Úgy teszel, mintha elfutnál, de inkább megtámadod {"position":"1900,4850","size":"100,100"}
+Elkezdesz futni, a bika pedig utánad fut. Hírtelen megfordulsz és belécsapsz egyet. Látszik rajta a meglepedség, és a fájdalom. 
+
+Mit teszel?
+[[Semmit]] 
+[[Elmenekülök]]
+[[Ráugrok és elkezdem verni a fejét]]
+
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
