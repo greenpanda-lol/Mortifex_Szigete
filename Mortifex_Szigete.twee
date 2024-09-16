@@ -60,7 +60,7 @@ HP: $hp/10
 Beérsz az erdőbe. Furcsa hangokra leszel figyelmes. (if:$claimed_erdő_kenyér is "false")[Meglátsz a földön egy szelet kenyeret.]
 Mit teszel?
 (if:$claimed_erdő_kenyér is "false")[
-[[Elviszem az 1x kenyeret]] ]
+[[Elviszem a kenyeret]] ]
 [[Elindulok jobbra]] 
 
 HP: $hp/10 
@@ -218,9 +218,12 @@ Nekiugrasz a Mutáns Bikának. Üvölt egyet, majd ő is elkezd futni feléd. Me
 [[Kattints ide]] 
 ] Mit teszel?
 [[Kézzel támadok]] 
-[[Fa karddal támadok]]
-[[Kő karddal támadok]] 
-[[Mythic karddal támadok]] 
+(if:$fa_kard is "true")[
+[[Fa karddal támadok]]]
+(if:$kő_kard is "true")[
+[[Kő karddal támadok]]]
+(if:$mythic_kard is "true")[
+[[Mythic karddal támadok]]]
 
 HP: $hp/10 
 [[Mutasd az eszközeimet]] 
@@ -336,17 +339,24 @@ HP: $hp/10
 
 
 :: Megpróbálok elmenni, ahol kezdtem {"position":"2000,5200","size":"100,100"}
-JELENLEG A JÁTÉK EDDIG VAN FEJLESZTVE!
-További cselekmények később lesznek.
+Ahogy futsz, meglátod, hogy vér van a földön. Vér cseppek. Ahogy elnézel, tudod, hogy ott a Mutáns bika lehet.
 
-Előről kezdés: [[Kezdés]] 
+Mit teszel?
+[[Tovább megyek ->Kezdés]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
 
 
 :: Menekülök {"position":"1550,4750","size":"100,100"}
-JELENLEG A JÁTÉK EDDIG VAN FEJLESZTVE!
-További cselekmények később lesznek.
+Ahogy mész, mész és mész egy táblát pillantasz meg: ""(text-colour:cyan)[Vándor, itt döntésed akad számos, de ezek között van pár, ami csak mulatságos. Hát merre mész?]
 
-Előről kezdés: [[Kezdés]] 
+Mit teszel?
+[[Tovább megyek előre]]
+[[Visszafordulok és megpróbálok elindulni a kezdőpontodhoz]]
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
 
 
 :: Mutasd az eszközeimet {"position":"2600,5600","size":"100,100"}
@@ -451,6 +461,16 @@ HP: $hp/10
 [[Mutasd az eszközeimet]] 
 
 
+:: Tovább megyek előre {"position":"1025,4750","size":"100,100"}
+Ahogy méginkább előre haladsz, elérsz az erdő végére. Utána már csak egy kis partot találsz, ahol egy kicsit megpihensz. Eközben látod, hogy mennyire sok víz veszi körül a szigetet. 
+
+Mit teszel?
+[[Visszafordulok és megpróbálok elindulni a kezdőpontodhoz]]
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
+
+
 :: Támadás: Fa kard {"position":"2500,4325","size":"100,100"}
 Megfogod a fa kardod és nekirohansz a szörnynek. A szörny próbál védekezni, de sikeresen megölöd.
 Találsz nála egy könyvet és egy kő kardot.
@@ -511,6 +531,16 @@ Mit teszel?
 [[Elviszem a kő kardot]]
 ]
 [[Elindulok az erdő felé]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
+
+
+:: Visszafordulok és megpróbálok elindulni a kezdőpontodhoz {"position":"1600,5050","size":"100,100"}
+Nagyon sokáig haladsz visszafelé. Már nem is vagy biztos benne, hogy jó irányba mész.
+
+Mit teszel?
+[[Tovább megyek ->Megpróbálok elmenni, ahol kezdtem]]
 
 HP: $hp/10 
 [[Mutasd az eszközeimet]] 

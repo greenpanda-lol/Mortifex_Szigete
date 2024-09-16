@@ -28,7 +28,7 @@ HP: $hp/10
 (set: $claimed_erdő_kenyér to &quot;false&quot;)</tw-passagedata><tw-passagedata pid="2" name="Elindulok az erdőbe" tags="" position="2400,5150" size="100,100">Beérsz az erdőbe. Furcsa hangokra leszel figyelmes. (if:$claimed_erdő_kenyér is &quot;false&quot;)[Meglátsz a földön egy szelet kenyeret.]
 Mit teszel?
 (if:$claimed_erdő_kenyér is &quot;false&quot;)[
-[[Elviszem az 1x kenyeret]] ]
+[[Elviszem a kenyeret]] ]
 [[Elindulok jobbra]] 
 
 HP: $hp/10 
@@ -253,9 +253,12 @@ Előről kezdés: [[Kezdés]] </tw-passagedata><tw-passagedata pid="26" name="Ha
 [[Kattints ide]] 
 ] Mit teszel?
 [[Kézzel támadok]] 
-[[Fa karddal támadok]]
-[[Kő karddal támadok]] 
-[[Mythic karddal támadok]] 
+(if:$fa_kard is &quot;true&quot;)[
+[[Fa karddal támadok]]]
+(if:$kő_kard is &quot;true&quot;)[
+[[Kő karddal támadok]]]
+(if:$mythic_kard is &quot;true&quot;)[
+[[Mythic karddal támadok]]]
 
 HP: $hp/10 
 [[Mutasd az eszközeimet]] </tw-passagedata><tw-passagedata pid="27" name="Odaadod a kenyeredet" tags="" position="2225,4200" size="100,100">Odaadod a kenyeredet a szörnynek, aki elégedetten mosolyog és felfalja a kenyeret, majd elkezd integetni. (set: $kenyér to -1)
@@ -315,10 +318,14 @@ Mit teszel?
 [[Lassan kikerülöm és tovább megyek]]
 
 HP: $hp/10 
-[[Mutasd az eszközeimet]] </tw-passagedata><tw-passagedata pid="35" name="Menekülök" tags="" position="1550,4750" size="100,100">JELENLEG A JÁTÉK EDDIG VAN FEJLESZTVE!
-További cselekmények később lesznek.
+[[Mutasd az eszközeimet]] </tw-passagedata><tw-passagedata pid="35" name="Menekülök" tags="" position="1550,4750" size="100,100">Ahogy mész, mész és mész egy táblát pillantasz meg: &quot;&quot;(text-colour:cyan)[Vándor, itt döntésed akad számos, de ezek között van pár, ami csak mulatságos. Hát merre mész?]
 
-Előről kezdés: [[Kezdés]] </tw-passagedata><tw-passagedata pid="36" name="Semmit" tags="" position="1900,4750" size="100,100">A bika meglepődik, de nem sokat tétovázik, hanem neked rohan, te elesel és átszalad rajtad. (text-colour:red)[-6 HP]
+Mit teszel?
+[[Tovább megyek előre]]
+[[Visszafordulok és megpróbálok elindulni a kezdőpontodhoz]]
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] </tw-passagedata><tw-passagedata pid="36" name="Semmit" tags="" position="1900,4750" size="100,100">A bika meglepődik, de nem sokat tétovázik, hanem neked rohan, te elesel és átszalad rajtad. (text-colour:red)[-6 HP]
 (set: $hp to (abs:$hp-6))
 (if:$hp &lt; 1)[
 [[Kattints ide]] ]
@@ -355,14 +362,29 @@ Mit teszel?
 [[Megpróbálok elmenni, ahol kezdtem]]
 
 HP: $hp/10 
-[[Mutasd az eszközeimet]] </tw-passagedata><tw-passagedata pid="40" name="Megpróbálok elmenni, ahol kezdtem" tags="" position="2000,5200" size="100,100">JELENLEG A JÁTÉK EDDIG VAN FEJLESZTVE!
-További cselekmények később lesznek.
+[[Mutasd az eszközeimet]] </tw-passagedata><tw-passagedata pid="40" name="Megpróbálok elmenni, ahol kezdtem" tags="" position="2000,5200" size="100,100">Ahogy futsz, meglátod, hogy vér van a földön. Vér cseppek. Ahogy elnézel, tudod, hogy ott a Mutáns bika lehet.
 
-Előről kezdés: [[Kezdés]] </tw-passagedata><tw-passagedata pid="41" name="Rádobom a Mythic kardom a hasa környékére" tags="" position="1900,5050" size="100,100">A Mutáns Bika egy óriásit ordít. Te ijedtedben egy kicsit hátra hőkölsz, de amikor látod, hogy elesik és lehunyja a szemét, tudatosul benned, hogy a bika meghalt. Kiveszed a kardod a testéből.
+Mit teszel?
+[[Tovább megyek -&gt;Kezdés]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] </tw-passagedata><tw-passagedata pid="41" name="Rádobom a Mythic kardom a hasa környékére" tags="" position="1900,5050" size="100,100">A Mutáns Bika egy óriásit ordít. Te ijedtedben egy kicsit hátra hőkölsz, de amikor látod, hogy elesik és lehunyja a szemét, tudatosul benned, hogy a bika meghalt. Kiveszed a kardod a testéből.
 
 Mit teszel?
 [[Elmenekülök]]
 [[Megpróbálok elmenni, ahol kezdtem]]
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] </tw-passagedata><tw-passagedata pid="42" name="Tovább megyek előre" tags="" position="1025,4750" size="100,100">Ahogy méginkább előre haladsz, elérsz az erdő végére. Utána már csak egy kis partot találsz, ahol egy kicsit megpihensz. Eközben látod, hogy mennyire sok víz veszi körül a szigetet. 
+
+Mit teszel?
+[[Visszafordulok és megpróbálok elindulni a kezdőpontodhoz]]
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] </tw-passagedata><tw-passagedata pid="43" name="Visszafordulok és megpróbálok elindulni a kezdőpontodhoz" tags="" position="1600,5050" size="100,100">Nagyon sokáig haladsz visszafelé. Már nem is vagy biztos benne, hogy jó irányba mész.
+
+Mit teszel?
+[[Tovább megyek -&gt;Megpróbálok elmenni, ahol kezdtem]]
 
 HP: $hp/10 
 [[Mutasd az eszközeimet]] </tw-passagedata></tw-storydata>
