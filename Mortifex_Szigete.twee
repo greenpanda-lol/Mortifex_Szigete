@@ -15,6 +15,25 @@ Mortifex Szigete
 }
 
 
+:: +1 kenyér {"position":"2900,5600","size":"100,100"}
+(set: $kenyér to (abs:$kenyér + 1))
+[[Mutasd az eszközeimet]] 
+
+
+:: Bedobok egy kenyeret {"position":"1700,3700","size":"100,100"}
+Ahogy bedobod a kenyeret, a gép rögtön beszippantja és elkezd nagyon gyorsan villogni és valamit kiad a gép. (set: $kenyér_kaszinó_nyerés to (random: 1, 100))(set: $kenyér to (abs: $kenyér - 1))
+
+A NYEREMÉNYED: (set: $kenyér_kaszinó_nyerés to (random: 1, 100))(if: $kenyér_kaszinó_nyerés <= 2)[1x kenyér (set: $kenyér to (abs: $kenyér + 1))](else-if: $kenyér_kaszinó_nyerés <= 5)[Mythic Kard (set: $mythic_kard to "true")](else-if: $kenyér_kaszinó_nyerés <= 40)[Kő Kard (set: $kő_kard to "true")](else-if: $kenyér_kaszinó_nyerés <= 55)[Amulett (set: $amulett to "true")](else-if: $kenyér_kaszinó_nyerés <= 75)[1x csoki (set: $csoki to (abs: $csoki + 1))](else-if: $kenyér_kaszinó_nyerés <= 90)[1x aranytallér (set: $aranytallér to (abs: $aranytallér + 1))](else:)[Semmi]
+
+
+Mit teszel?
+(if:$kenyér > 0)[[Bedobok még egy kenyeret ->Bedobok egy kenyeret]]
+[[Ellépek a Kenyér Kaszinótól ->Kenyér kaszinó]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]]
+
+
 :: Bemegyek a sátorba {"position":"2600,4750","size":"100,100"}
 A sátorban egy szelet kenyér, egy hálózsák és egy fa kard található. Ahogy megvisgálod a hálózsákot, hátha van valami benne, észreveszed, hogy a hálózsák a sátor része, így nem lehet elmozdítani. A hálózsák üres.
 
@@ -27,6 +46,16 @@ Mit teszel?
 
 HP: $hp/10 
 [[Mutasd az eszközeimet]] 
+
+
+:: Bemegyek az erdőbe {"position":"2200,3700","size":"100,100"}
+Ahogy haladsz, meglátsz egy furcsa helyet, ahonnan fény szűrődik ki, de a fák miatt nem látod.
+
+Mit teszel?
+[[Odamegyek ->Kenyér kaszinó]]
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]]
 
 
 :: Elindulok a pusztába {"position":"2575,5125","size":"100,100"}
@@ -258,6 +287,17 @@ Kezd előről: [[Kezdés]]
 A játékot készítette: greenpanda
 
 
+:: Kenyér kaszinó {"position":"1900,3700","size":"100,100"}
+A helyen nincs senki. Fa rönkök vannak félkörben, amiken kényelmesen meg lehet pihenni, viszont nem ez a hely lényege, hanem egy nagy gép. A gépen egy nagy figyelemfelkeltő felirat díszeleg: (text-colour:cyan)[Kenyér Kaszinó!]
+A szöveg alatt még megtalálható két lyuk. Az egyik fölé az van írva, hogy (text-colour:cyan)[Kenyért ide], tőle jobbra pedig egy nagyobb lyuk, ahova pedig (text-colour:cyan)[Nyeremény] szöveg van írva.
+
+Mit teszel?
+[[Odalépek a Kenyér Kaszinóhoz]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]]
+
+
 :: Kezdés {"position":"2600,5300","size":"100,100"}
 A szigeten találod magad. Előtted a pusztát látod, balra pedig egy erdő terül el. Jobbra egy óriási sivatagot látsz. A szigetről sokan azt beszélik, hogy szörnyek lakják de eddig ezt senki nem erősítette meg.
 
@@ -273,6 +313,9 @@ HP: $hp/10
 (set: $kő_kard to "false")
 (set: $mythic_kard to "false")
 (set: $könyv to "false")
+(set: $amulett to "false")
+(set: $csoki to 0)
+(set: $aranytallér to 0)
 (set: $kenyér to 0)
 (set: $claimed_sátor_kenyér to "false")
 (set: $claimed_erdő_kenyér to "false")
@@ -342,7 +385,7 @@ HP: $hp/10
 Ahogy futsz, meglátod, hogy vér van a földön. Vér cseppek. Ahogy elnézel, tudod, hogy ott a Mutáns bika lehet.
 
 Mit teszel?
-[[Tovább megyek ->Kezdés]] 
+[[Tovább megyek a kezdőhely felé]]
 
 HP: $hp/10 
 [[Mutasd az eszközeimet]] 
@@ -359,7 +402,15 @@ HP: $hp/10
 [[Mutasd az eszközeimet]] 
 
 
+:: Minden eszköz {"position":"3000,5600","size":"100,100"}
+(set: $fa_kard to "true")(set: $kő_kard to "true")(set: $mythic_kard to "true")
+[[Mutasd az eszközeimet]] 
+
+
 :: Mutasd az eszközeimet {"position":"2600,5600","size":"100,100"}
+CHEAT MENU:
+[[+1 kenyér]] [[Minden eszköz]] [[Kezdés ->Tovább megyek a kezdőhely felé]][[Kenyér kaszinó]] 
+
 Az eszközeid:
 
 Fegyverek:
@@ -398,6 +449,20 @@ Mit teszel?
 
 HP: $hp/10 
 [[Mutasd az eszközeimet]] 
+
+
+:: Odalépek a Kenyér Kaszinóhoz {"position":"1800,3700","size":"100,100"}
+A Kenyér Kaszinó nagy gépe elé lépsz. A gép fényei villognak.
+Jelenlegi kenyereid: $kenyér
+
+Mit teszel?
+(if:$kenyér > 0)[
+[[Bedobok egy kenyeret]] 
+]
+[[Visszalépek ->Kenyér kaszinó]]
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]]
 
 
 :: Rádobom a Mythic kardom a hasa környékére {"position":"1900,5050","size":"100,100"}
@@ -451,11 +516,34 @@ HP: $hp/10
 [[Mutasd az eszközeimet]] 
 
 
+:: Tovább haladok {"position":"2500,3700","size":"100,100"}
+Nagyon sokáig mész és végül megállsz megpihenni. Itt már nagyon közel van egymáshoz az erdő és a sivatag, te pedig még mindig a pusztán vagy.
+
+Mit teszel?
+[[Bemegyek az erdőbe]]
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]]
+
+
 :: Tovább megyek {"position":"2500,4675","size":"100,200"}
 Ahogy elhagyod a sátrat, tovább haladsz. Egy szörnyel találod magad szemben, akin látszik, hogyha közelítesz, rögtön megakar ölni. Szürke teste van, de a szeme vörösek és néhol vérzik is a szörny. Meglátod balra az erdőt.
 
 Mit teszel?
 [[Harcolok a szörnyel.]] 
+[[Kikerülöm és elindulok az erdő felé.]] 
+
+HP: $hp/10 
+[[Mutasd az eszközeimet]] 
+
+
+:: Tovább megyek a kezdőhely felé {"position":"2275,5350","size":"100,100"}
+Sikeresen megtalálod a kezdőhelyet. Előtted a pusztát látod, balra pedig egy erdő terül el. Jobbra egy óriási sivatagot látsz. A szigetről sokan azt beszélik, hogy szörnyek lakják de eddig ezt senki nem erősítette meg.
+
+Merre indulsz?
+[[Elindulok az erdőbe]]
+[[Elindulok a pusztába]]
+[[Elindulok a sivatagba]]
 
 HP: $hp/10 
 [[Mutasd az eszközeimet]] 
@@ -482,7 +570,8 @@ Mit teszel?
 (if:$kő_kard is "false")[
 [[Elviszem a kő kardot]]
 ]
-[[Elindulok az erdő felé]] 
+[[Elindulok az erdő felé]]
+[[Tovább haladok]] 
 
 HP: $hp/10 
 [[Mutasd az eszközeimet]] 
@@ -514,6 +603,7 @@ Mit teszel?
 [[Elviszem a kő kardot]]
 ]
 [[Elindulok az erdő felé]] 
+[[Tovább haladok]] 
 
 HP: $hp/10 
 [[Mutasd az eszközeimet]] 
@@ -531,6 +621,7 @@ Mit teszel?
 [[Elviszem a kő kardot]]
 ]
 [[Elindulok az erdő felé]] 
+[[Tovább haladok]] 
 
 HP: $hp/10 
 [[Mutasd az eszközeimet]] 
